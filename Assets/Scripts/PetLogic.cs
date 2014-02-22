@@ -81,9 +81,9 @@ public class PetLogic : MonoBehaviour {
 			SendHungry();
 		}
 
-		if (tiredness > TIREDNESS_THRESHOLD) {
-			SendSleepy();
-		}
+		//if (tiredness > TIREDNESS_THRESHOLD) {
+		//	SendSleepy();
+		//}
 
 		if (excrements > EXCREMENTS_THRESHOLD) {
 			StartCoroutine( SendExcrement());
@@ -218,6 +218,7 @@ public class PetLogic : MonoBehaviour {
 		yield return new WaitForSeconds (EAT_WAIT);
 		if (animator) {
 			animator.SetBool("Eating", false);
+			yield return new WaitForSeconds (EAT_WAIT);
 			animator.SetBool("Hungry", false);
 		}
 		hunger -= 50;
@@ -237,6 +238,7 @@ public class PetLogic : MonoBehaviour {
 		yield return new WaitForSeconds (PLAY_WAIT);
 		if (animator) {
 			animator.SetBool("Petting", false);
+			yield return new WaitForSeconds (PLAY_WAIT);
 			animator.SetBool("Attention", false);
 		}
 		mood += 50;
