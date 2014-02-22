@@ -21,7 +21,7 @@ public class BallUpdater : MonoBehaviour {
 				0.0f
 				);
 
-		if (ball.transform.position.magnitude <= 10 && Time.time - lastBall > 10) {
+		if (ball.transform.position.magnitude <= 10 && Time.time - lastBall > 3) {
 			// TODO: prevent spam
 			lastBall = Time.time;
 			StartCoroutine(cat.OnPetting());
