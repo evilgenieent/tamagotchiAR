@@ -66,19 +66,19 @@ public class PetLogic : MonoBehaviour {
 
 	void UpdateState() {
 
-		hunger += Random.Range(0.2, 0.5);
-		tiredness += Random.Range(0.2, 0.5);
-		excrements += Random.Range(0.2, 0.5);
-		mood -= Random.Range(0.2, 0.5);
+		hunger += Random.Range(0.2f, 0.5f);
+		tiredness += Random.Range(0.2f, 0.5f);
+		excrements += Random.Range(0.2f, 0.5f);
+		mood -= Random.Range(0.2f, 0.5f);
 
 		if (hunger < HUNGER_THRESHOLD || mood < MOOD_THRESHOLD) {
-			health -= Random.Range(0.2, 0.5);
+			health -= Random.Range(0.2f, 0.5f);
 		} else {
-			health += Random.Range(0.2, 0.5);
+			health += Random.Range(0.2f, 0.5f);
 		}
 
 		if (mood > MOOD_THRESHOLD) {
-			health += Random.Range(0.2, 0.5);
+			health += Random.Range(0.2f, 0.5f);
 		}
 
 	}
