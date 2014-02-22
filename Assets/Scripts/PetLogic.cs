@@ -96,7 +96,9 @@ public class PetLogic : MonoBehaviour {
 		if (tiredness > 100)
 			tiredness = 100;
 		if (mood > 100)
-			hunger = 100;
+			mood = 100;
+		if (mood < 0)
+			mood = 0;
 
 		if (hunger < HUNGER_THRESHOLD || mood < MOOD_THRESHOLD) {
 			health -= Random.Range(INC_MIN, INC_MAX);
