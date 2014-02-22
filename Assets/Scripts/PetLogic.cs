@@ -40,7 +40,7 @@ public class PetLogic : MonoBehaviour {
 
 	private Animator animator;
 	private GameObject excrement;
-	private float excrementTime;
+	private float excrementTime = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -262,12 +262,12 @@ public class PetLogic : MonoBehaviour {
 			Collider[] colliderComponents = excrement.GetComponentsInChildren<Collider> (true);
 						// Disable rendering:
 			foreach (Renderer component in rendererComponents) {
-					component.enabled = true;
+					component.enabled = false;
 			}
 		
 			// Disable colliders:
 			foreach (Collider component in colliderComponents) {
-					component.enabled = true;
+					component.enabled = false;
 			}
 		}
 		
