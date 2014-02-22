@@ -40,6 +40,7 @@ public class PetLogic : MonoBehaviour {
 
 	private Animator animator;
 	private GameObject excrement;
+	private float excrementTime;
 
 	// Use this for initialization
 	void Start () {
@@ -73,6 +74,7 @@ public class PetLogic : MonoBehaviour {
 			UpdateState();
 			nextUpdate = Time.time + updateRate;
 		}
+		RemoveExcrement ();
 	}
 
 	void checkState() {
@@ -229,6 +231,7 @@ public class PetLogic : MonoBehaviour {
 
 			// cat wants to poo randomly
 			excrements += Random.Range (60.0f, 60.0f);
+			excrementTime = Time.time + 10;
 		}
 	}
 	
@@ -251,5 +254,22 @@ public class PetLogic : MonoBehaviour {
 			if (tiredness > 100)
 				tiredness = 100;
 		}
+	}
+	private void RemoveExcrement() {
+		if (Time.time > excrementTime) {
+			excrement = GameObject.FindWithTag ("Excrement");
+			Renderer[] rendererComponents = excrement.GetComponentsInChildren<Renderer> (true);
+			Collider[] colliderComponents = excrement.GetComponentsInChildren<Collider> (true);
+						// Disable rendering:
+			foreach (Renderer component in rendererComponents) {
+					component.enabled = true;
+			}
+		
+			// Disable colliders:
+			foreach (Collider component in colliderComponents) {
+					component.enabled = true;
+			}
+		}
+		
 	}
 }
