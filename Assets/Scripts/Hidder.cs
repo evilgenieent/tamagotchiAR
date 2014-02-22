@@ -93,6 +93,7 @@ ITrackableEventHandler
 	
 	private void OnTrackingLost()
 	{
+		hidder.transform.position = Vector3(100.0f, 100.0f, 100.0f);
 		Renderer[] rendererComponents = hidder.GetComponentsInChildren<Renderer>(true);
         Collider[] colliderComponents = hidder.GetComponentsInChildren<Collider>(true);
 
