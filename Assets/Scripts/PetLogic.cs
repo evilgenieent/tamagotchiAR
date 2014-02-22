@@ -45,7 +45,20 @@ public class PetLogic : MonoBehaviour {
 	void Start () {
 		animator = GetComponent<Animator> ();
 		excrement = GameObject.FindWithTag ("Excrement");
-		excrement.renderer.enabled = true;
+		Renderer[] rendererComponents = excrement.GetComponentsInChildren<Renderer>(true);
+		Collider[] colliderComponents = excrement.GetComponentsInChildren<Collider>(true);
+		
+		// Disable rendering:
+		foreach (Renderer component in rendererComponents)
+		{
+			component.enabled = false;
+		}
+		
+		// Disable colliders:
+		foreach (Collider component in colliderComponents)
+		{
+			component.enabled = false;
+		}
 	}
 	
 	// Update is called once per frame
@@ -170,8 +183,21 @@ public class PetLogic : MonoBehaviour {
 		if (animator) {
 			animator.SetBool("Excrement", false);
 		}
-		GameObject excrement = GameObject.FindWithTag ("excrement");
-		excrement.renderer.enabled = true;
+		excrement = GameObject.FindWithTag ("Excrement");
+		Renderer[] rendererComponents = excrement.GetComponentsInChildren<Renderer>(true);
+		Collider[] colliderComponents = excrement.GetComponentsInChildren<Collider>(true);
+		
+		// Disable rendering:
+		foreach (Renderer component in rendererComponents)
+		{
+			component.enabled = true;
+		}
+		
+		// Disable colliders:
+		foreach (Collider component in colliderComponents)
+		{
+			component.enabled = true;
+		}
 	}
 
 
@@ -199,7 +225,7 @@ public class PetLogic : MonoBehaviour {
 			hunger = 0;
 
 		// cat wants to poo randomly
-		excrements += Random.Range (30.0f, 60.0f);
+		excrements += Random.Range (60.0f, 60.0f);
 
 	}
 	
