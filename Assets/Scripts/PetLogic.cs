@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PetLogic : MonoBehaviour {
 
 	private float hunger = 0;
@@ -10,11 +11,17 @@ public class PetLogic : MonoBehaviour {
 	private float health = 100;
 	// whether the pet needs attention or not
 	private float mood = 100;
-	
+
+	public GUIText txtHunger;
+	// TODO implement tiredness
+	//public GUIText txtTiredness;
+	public GUIText txtHealth;
+	public GUIText txtMood;
+
 	// all thresholds
 	private const float HUNGER_THRESHOLD = 10;
 	private const float TIREDNESS_THRESHOLD = 50;
-	private const float EXCREMENTS_THRESHOLD = 3;
+	private const float EXCREMENTS_THRESHOLD = 50;
 	private const float HEALTH_THRESHOLD = 50;
 	private const float MOOD_THRESHOLD = 50;
 
@@ -80,8 +87,16 @@ public class PetLogic : MonoBehaviour {
 
 		hunger += Random.Range(INC_MIN, INC_MAX);
 		tiredness += Random.Range(INC_MIN, INC_MAX);
-		excrements += Random.Range(INC_MIN, INC_MAX);
+		//excrements += Random.Range(INC_MIN, INC_MAX);
 		mood -= Random.Range(INC_MIN, INC_MAX);
+
+		// do not allow values above 100
+		if (hunger > 100)
+			hunger = 100;
+		if (tiredness > 100)
+			tiredness = 100;
+		if (mood > 100)
+			hunger = 100;
 
 		if (hunger < HUNGER_THRESHOLD || mood < MOOD_THRESHOLD) {
 			health -= Random.Range(INC_MIN, INC_MAX);
@@ -92,6 +107,15 @@ public class PetLogic : MonoBehaviour {
 		if (mood > MOOD_THRESHOLD) {
 			health += Random.Range(INC_MIN, INC_MAX);
 		}
+		// do not allow values above 100
+		if (health > 100)
+			health = 100;
+
+		txtHealth.text = "Health: " + Mathf.Floor(health).ToString + "%";
+		txtHunger.text = "Hunger: " + Mathf.Floor(hunger).ToString + hunger + "%";
+		txtMood.text = "Mood: " + Mathf.Floor(mood).ToString + mood + "%";
+		// TODO implement tiredness
+		//txtTiredness.text = "Tiredness: " + tiredness + "%";
 
 		Debug.Log ("Excrements: " + excrements);
 		Debug.Log ("Hunger: " + hunger);
@@ -159,6 +183,9 @@ public class PetLogic : MonoBehaviour {
 		if (hunger < 0)
 			hunger = 0;
 
+		// cat wants to poo randomly
+		excrements += Random.Range (30.0f, 60.0f);
+
 	}
 	
 	public IEnumerator OnPetting() {
@@ -171,8 +198,11 @@ public class PetLogic : MonoBehaviour {
 			animator.SetBool("Petting", false);
 			animator.SetBool("Attention", false);
 		}
-		mood -= 50;
-		if (mood < 0)
-			mood = 0;
+		mood += 50;
+		if (mood > 100)
+			mood = 100;
+		tiredness += 20;
+		if (tiredness > 100)
+			tiredness = 100;
 	}
 }
