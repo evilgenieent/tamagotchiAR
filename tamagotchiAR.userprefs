@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Models\Materials\NewShader.shader">
     <Files>
+      <File FileName="Assets\Models\Materials\NewShader.shader" Line="1" Column="1" />
       <File FileName="Assets\Models\Materials\NewShader.shader" Line="6" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
