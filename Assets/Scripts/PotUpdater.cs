@@ -21,7 +21,7 @@ public class PotUpdater : MonoBehaviour {
 				transform.position.z
 				);
 		
-		if (pot.transform.position.magnitude <= 10 && Time.time - lastPot > 3) {
+		if (pot.transform.position.magnitude <= 30 && Time.time - lastPot > 3) {
 			// TODO: prevent spam
 			lastPot = Time.time;
 			StartCoroutine(cat.OnFood());
