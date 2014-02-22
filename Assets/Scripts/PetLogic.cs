@@ -10,9 +10,7 @@ public class PetLogic : MonoBehaviour {
 	private float health = 100;
 	// whether the pet needs attention or not
 	private float mood = 100;
-
-
-	private int i = 0;
+	
 	// all thresholds
 	private const float HUNGER_THRESHOLD = 10;
 	private const float TIREDNESS_THRESHOLD = 50;
@@ -97,9 +95,13 @@ public class PetLogic : MonoBehaviour {
 
 		Debug.Log ("Excrements: " + excrements);
 		Debug.Log ("Hunger: " + hunger);
+		Debug.Log ("Tiredness: " + tiredness);
+		Debug.Log ("Mood: " + mood);
+		Debug.Log ("Health: " + health);
 	}
 
 	void SendHungry() {
+		Debug.Log ("+++SendHungry+++");
 		if (animator) {
 			animator.SetBool("Hungry", true);
 		}
@@ -107,19 +109,21 @@ public class PetLogic : MonoBehaviour {
 	}
 
 	void SendAttention() {
+		Debug.Log ("+++SendAttention+++");
 		if (animator) {
 			animator.SetBool("Attention", true);
 		}
 	}
 
 	void SendSleepy() {
+		Debug.Log ("+++SendSleepy+++");
 		if (animator) {
 			animator.SetBool("Sleepy", true);
 		}
 	}
 
 	IEnumerator SendExcrement() {
-		Debug.Log ("+++SendExcrement+++: " + i++);
+		Debug.Log ("+++SendExcrement+++");
 		if (animator) {
 			animator.SetBool("Excrement", true);
 		}
@@ -133,6 +137,7 @@ public class PetLogic : MonoBehaviour {
 
 
 	void SendDeath() {
+		Debug.Log ("+++SendDeath+++");
 		if (animator) {
 			animator.SetBool("Dead", true);
 		}
@@ -140,6 +145,7 @@ public class PetLogic : MonoBehaviour {
 	
 
 	public IEnumerator OnFood() {
+		Debug.Log ("+++OnFood+++");
 		// gets called by user interaction script
 		if (animator) {
 			animator.SetBool("Eating", true);
@@ -156,6 +162,7 @@ public class PetLogic : MonoBehaviour {
 	}
 	
 	public IEnumerator OnPetting() {
+		Debug.Log ("+++OnPetting+++");
 		if (animator) {
 			animator.SetBool("Petting", true);
 		}
