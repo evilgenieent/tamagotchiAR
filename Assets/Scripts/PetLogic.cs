@@ -101,7 +101,7 @@ public class PetLogic : MonoBehaviour {
 
 	void UpdateState() {
 
-		hunger += Random.Range(INC_MIN, INC_MAX);
+		hunger += Random.Range(INC_MIN*2, INC_MAX*2);
 		tiredness += Random.Range(INC_MIN, INC_MAX);
 		//excrements += Random.Range(INC_MIN, INC_MAX);
 		mood -= Random.Range(INC_MIN, INC_MAX);
@@ -222,7 +222,7 @@ public class PetLogic : MonoBehaviour {
 				yield return new WaitForSeconds (EAT_WAIT);
 				animator.SetBool("Hungry", false);
 			}
-			hunger = 50;
+			hunger = 0;
 			if (hunger < 0)
 				hunger = 0;
 
