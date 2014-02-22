@@ -13,11 +13,11 @@ public class PetLogic : MonoBehaviour {
 
 
 	// all thresholds
-	public const float HUNGER_THRESHOLD = 1;
-	public const float TIREDNESS_THRESHOLD = 50;
-	public const float EXCREMENTS_THRESHOLD = 50;
-	public const float HEALTH_THRESHOLD = 50;
-	public const float MOOD_THRESHOLD = 50;
+	private const float HUNGER_THRESHOLD = 50;
+	private const float TIREDNESS_THRESHOLD = 50;
+	private const float EXCREMENTS_THRESHOLD = 1;
+	private const float HEALTH_THRESHOLD = 50;
+	private const float MOOD_THRESHOLD = 50;
 
 	// incremention random factor (range)
 	public const float INC_MIN = 0.2f;
@@ -120,6 +120,7 @@ public class PetLogic : MonoBehaviour {
 		if (animator) {
 			animator.SetBool("Excrement", false);
 		}
+		excrements = 0;
 	}
 
 	void SendDeath() {
@@ -139,6 +140,9 @@ public class PetLogic : MonoBehaviour {
 			animator.SetBool("Eating", false);
 			animator.SetBool("Hungry", false);
 		}
+		hunger -= 50;
+		if (hunger < 0)
+			hunger = 0;
 
 	}
 	
@@ -151,5 +155,8 @@ public class PetLogic : MonoBehaviour {
 			animator.SetBool("Petting", false);
 			animator.SetBool("Attention", false);
 		}
+		mood -= 50;
+		if (mood < 0)
+			mood = 0;
 	}
 }
