@@ -6,11 +6,11 @@ public class BallUpdater : MonoBehaviour {
 	public GameObject ball;
 	public PetLogic cat;
 
-	PetLogic logic;
+	private float lastBall;
 
 	// Use this for initialization
 	void Start () {
-	
+		lastBall = Time.time;
 	}
 
 	void FixedUpdate() {
@@ -21,8 +21,9 @@ public class BallUpdater : MonoBehaviour {
 				0.0f
 				);
 
-		if (ball.transform.position.magnitude <= 10) {
+		if (ball.transform.position.magnitude <= 10 && Time.time - lastBall > 10) {
 			// TODO: prevent spam
+			lastBall = Time.time;
 			StartCoroutine(cat.OnPetting());
 		}
 	}
