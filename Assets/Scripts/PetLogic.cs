@@ -11,14 +11,23 @@ public class PetLogic : MonoBehaviour {
 	// whether the pet needs attention or not
 	private float mood = 100;
 
-	private const float HUNGER_THRESHOLD = 50;
-	private const float TIREDNESS_THRESHOLD = 50;
-	private const float EXCREMENTS_THRESHOLD = 50;
-	private const float HEALTH_THRESHOLD = 50;
-	private const float MOOD_THRESHOLD = 50;
+	// all thresholds
+	public const float HUNGER_THRESHOLD = 1;
+	public const float TIREDNESS_THRESHOLD = 50;
+	public const float EXCREMENTS_THRESHOLD = 50;
+	public const float HEALTH_THRESHOLD = 50;
+	public const float MOOD_THRESHOLD = 50;
+
+	// incremention random factor (range)
+	public const float INC_MIN = 0.2f;
+	public const float INC_MAX = 0.5f;
+
+	//
+	public const float EAT_WAIT = 5;
+	public const float PLAY_WAIT = 5;
 
 	private float nextUpdate = 0;
-
+	// how fast the script updates
 	public float updateRate;
 
 	private Animator animator;
@@ -68,56 +77,75 @@ public class PetLogic : MonoBehaviour {
 
 	void UpdateState() {
 
-		hunger += Random.Range(0.2f, 0.5f);
-		tiredness += Random.Range(0.2f, 0.5f);
-		excrements += Random.Range(0.2f, 0.5f);
-		mood -= Random.Range(0.2f, 0.5f);
+		hunger += Random.Range(INC_MIN, INC_MAX);
+		tiredness += Random.Range(INC_MIN, INC_MAX);
+		excrements += Random.Range(INC_MIN, INC_MAX);
+		mood -= Random.Range(INC_MIN, INC_MAX);
 
 		if (hunger < HUNGER_THRESHOLD || mood < MOOD_THRESHOLD) {
-			health -= Random.Range(0.2f, 0.5f);
+			health -= Random.Range(INC_MIN, INC_MAX);
 		} else {
-			health += Random.Range(0.2f, 0.5f);
+			health += Random.Range(INC_MIN, INC_MAX);
 		}
 
 		if (mood > MOOD_THRESHOLD) {
-			health += Random.Range(0.2f, 0.5f);
+			health += Random.Range(INC_MIN, INC_MAX);
 		}
 
 	}
 
-	void sendHungry() {
-		if (this.animator) {
+	void SendHungry() {
+		if (animator) {
 			animator.SetBool("Hungry", true);
 		}
 	}
 
-	void sendSleepy() {
-		if (this.animator) {
+	void SendAttention() {
+		if (animator) {
+			animator.SetBool("Attention", true);
+		}
+	}
+
+	void SendSleepy() {
+		if (animator) {
 			animator.SetBool("Sleepy", true);
 		}
 	}
 
-	void sendExcrement() {
-		if (this.animator) {
+	void SendExcrement() {
+		if (animator) {
 			animator.SetBool("Excrement", true);
 		}
 	}
 
-	void sendDeath() {
-		if (this.animator) {
+	void SendDeath() {
+		if (animator) {
 			animator.SetBool("Dead", true);
 		}
 	}
+	
 
-	void sendAttention() {
-		// TODO
-	}
+	public void OnFood() {
+		// gets called by user interaction script
+		if (animator) {
+			animator.SetBool("Eating", true);
+		}
+		//yield return new WaitForSeconds (EAT_WAIT);
+		if (animator) {
+			animator.SetBool("Eating", false);
+			animator.SetBool("Hungry", false);
+		}
 
-	public void onFood() {
-		// TODO
 	}
 	
-	public void onAttention() {
-		// TODO
+	public void OnPetting() {
+		if (animator) {
+			animator.SetBool("Petting", true);
+		}
+		//yield return new WaitForSeconds (PLAY_WAIT);
+		if (animator) {
+			animator.SetBool("Petting", false);
+			animator.SetBool("Attention", false);
+		}
 	}
 }
