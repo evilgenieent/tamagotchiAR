@@ -4,6 +4,7 @@ using System.Collections;
 public class PotUpdater : MonoBehaviour {
 
 	public GameObject pot;
+	public PetLogic cat;
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +18,11 @@ public class PotUpdater : MonoBehaviour {
 				0.0f,
 				transform.position.z
 				);
+		
+		if (pot.transform.position.magnitude <= 10) {
+			// TODO: prevent spam
+			StartCoroutine(cat.OnFood());
+		}
 	}
 	
 	// Update is called once per frame
