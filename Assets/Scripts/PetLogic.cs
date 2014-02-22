@@ -4,13 +4,13 @@ using System.Collections;
 
 public class PetLogic : MonoBehaviour {
 
-	private float hunger = 0;
-	private float tiredness = 0;
+	private float hunger = 0.0f;
+	private float tiredness = 0.0f;
 	// whether the pet needs to go to the loo
-	private float excrements = 0;
-	private float health = 100;
+	private float excrements = 0.0f;
+	private float health = 100.0f;
 	// whether the pet needs attention or not
-	private float mood = 100;
+	private float mood = 100.0f;
 
 	public GUIText txtHunger;
 	// TODO implement tiredness
@@ -19,7 +19,7 @@ public class PetLogic : MonoBehaviour {
 	public GUIText txtMood;
 
 	// all thresholds
-	private const float HUNGER_THRESHOLD = 10;
+	private const float HUNGER_THRESHOLD = 50;
 	private const float TIREDNESS_THRESHOLD = 50;
 	private const float EXCREMENTS_THRESHOLD = 50;
 	private const float HEALTH_THRESHOLD = 50;
@@ -90,15 +90,7 @@ public class PetLogic : MonoBehaviour {
 		//excrements += Random.Range(INC_MIN, INC_MAX);
 		mood -= Random.Range(INC_MIN, INC_MAX);
 
-		// do not allow values above 100
-		if (hunger > 100)
-			hunger = 100;
-		if (tiredness > 100)
-			tiredness = 100;
-		if (mood > 100)
-			mood = 100;
-		if (mood < 0)
-			mood = 0;
+
 
 		if (hunger < HUNGER_THRESHOLD || mood < MOOD_THRESHOLD) {
 			health -= Random.Range(INC_MIN, INC_MAX);
@@ -109,13 +101,30 @@ public class PetLogic : MonoBehaviour {
 		if (mood > MOOD_THRESHOLD) {
 			health += Random.Range(INC_MIN, INC_MAX);
 		}
+
 		// do not allow values above 100
-		if (health > 100)
-			health = 100;
+		if (hunger > 100.0f)
+			hunger = 100.0f;
+		if (hunger < 0.0f)
+			hunger = 0.0f;
+		if (tiredness > 100.0f)
+			tiredness = 100.0f;
+		if (tiredness < 0.0f)
+			tiredness = 0.0f;
+		if (mood > 100.0f)
+			mood = 100.0f;
+		if (mood < 0.0f)
+			mood = 0.0f;
+
+		// do not allow values above 100
+		if (health > 100.0f)
+			health = 100.0f;
+		if (health < 0.0f)
+			health = 0.0f;
 
 		txtHealth.text = "Health: " + Mathf.Floor(health) + "%";
-		txtHunger.text = "Hunger: " + Mathf.Floor(hunger) + hunger + "%";
-		txtMood.text = "Mood: " + Mathf.Floor(mood) + mood + "%";
+		txtHunger.text = "Hunger: " + Mathf.Floor(hunger) + "%";
+		txtMood.text = "Mood: " + Mathf.Floor(mood) + "%";
 		// TODO implement tiredness
 		//txtTiredness.text = "Tiredness: " + tiredness + "%";
 
