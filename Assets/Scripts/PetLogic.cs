@@ -175,6 +175,7 @@ public class PetLogic : MonoBehaviour {
 
 	IEnumerator SendExcrement() {
 		Debug.Log ("+++SendExcrement+++");
+		yield return new WaitForSeconds (EXCREMENT_WAIT);
 		if (animator) {
 			animator.SetBool("Excrement", true);
 		}
