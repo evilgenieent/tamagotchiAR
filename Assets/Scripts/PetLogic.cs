@@ -11,7 +11,7 @@ public class PetLogic : MonoBehaviour {
 	// whether the pet needs attention or not
 	private float mood = 100;
 
-	private const float HUNGER_THRESHOLD = 50;
+	private const float HUNGER_THRESHOLD = 1;
 	private const float TIREDNESS_THRESHOLD = 50;
 	private const float EXCREMENTS_THRESHOLD = 50;
 	private const float HEALTH_THRESHOLD = 50;
