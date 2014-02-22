@@ -39,10 +39,13 @@ public class PetLogic : MonoBehaviour {
 	public float updateRate;
 
 	private Animator animator;
+	private GameObject excrement;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
+		excrement = GameObject.FindWithTag ("Excrement");
+		excrement.renderer.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -167,7 +170,8 @@ public class PetLogic : MonoBehaviour {
 		if (animator) {
 			animator.SetBool("Excrement", false);
 		}
-
+		GameObject excrement = GameObject.FindWithTag ("excrement");
+		excrement.renderer.enabled = true;
 	}
 
 
