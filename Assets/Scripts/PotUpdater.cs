@@ -6,9 +6,11 @@ public class PotUpdater : MonoBehaviour {
 	public GameObject pot;
 	public PetLogic cat;
 
+	private float lastPot;
+
 	// Use this for initialization
 	void Start () {
-	
+		lastPot = Time.time;
 	}
 
 	void FixedUpdate() {
@@ -19,8 +21,9 @@ public class PotUpdater : MonoBehaviour {
 				transform.position.z
 				);
 		
-		if (pot.transform.position.magnitude <= 10) {
+		if (pot.transform.position.magnitude <= 10 && Time.time - lastPot > 10) {
 			// TODO: prevent spam
+			lastPot = Time.time;
 			StartCoroutine(cat.OnFood());
 		}
 	}
