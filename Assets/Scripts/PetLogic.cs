@@ -210,7 +210,7 @@ public class PetLogic : MonoBehaviour {
 	
 
 	public IEnumerator OnFood() {
-		if(hunger >= 50)
+		if(hunger >= 50) {
 			Debug.Log ("+++OnFood+++");
 			// gets called by user interaction script
 			if (animator) {
@@ -232,21 +232,23 @@ public class PetLogic : MonoBehaviour {
 	}
 	
 	public IEnumerator OnPetting() {
-		Debug.Log ("+++OnPetting+++");
-		if (animator) {
-			animator.SetBool("Petting", true);
-		}
-		yield return new WaitForSeconds (PLAY_WAIT);
-		if (animator) {
-			animator.SetBool("Petting", false);
+		if(mood <= 50) {
+			Debug.Log ("+++OnPetting+++");
+			if (animator) {
+				animator.SetBool("Petting", true);
+			}
 			yield return new WaitForSeconds (PLAY_WAIT);
-			animator.SetBool("Attention", false);
+			if (animator) {
+				animator.SetBool("Petting", false);
+				yield return new WaitForSeconds (PLAY_WAIT);
+				animator.SetBool("Attention", false);
+			}
+			mood += 50;
+			if (mood > 100)
+				mood = 100;
+			tiredness += 20;
+			if (tiredness > 100)
+				tiredness = 100;
 		}
-		mood += 50;
-		if (mood > 100)
-			mood = 100;
-		tiredness += 20;
-		if (tiredness > 100)
-			tiredness = 100;
 	}
 }
