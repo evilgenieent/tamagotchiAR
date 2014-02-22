@@ -111,9 +111,9 @@ public class PetLogic : MonoBehaviour {
 		if (health > 100)
 			health = 100;
 
-		txtHealth.text = "Health: " + Mathf.Floor(health).ToString + "%";
-		txtHunger.text = "Hunger: " + Mathf.Floor(hunger).ToString + hunger + "%";
-		txtMood.text = "Mood: " + Mathf.Floor(mood).ToString + mood + "%";
+		txtHealth.text = "Health: " + Mathf.Floor(health) + "%";
+		txtHunger.text = "Hunger: " + Mathf.Floor(hunger) + hunger + "%";
+		txtMood.text = "Mood: " + Mathf.Floor(mood) + mood + "%";
 		// TODO implement tiredness
 		//txtTiredness.text = "Tiredness: " + tiredness + "%";
 
