@@ -12,10 +12,11 @@ public class PetLogic : MonoBehaviour {
 	private float mood = 100;
 
 
+	private int i = 0;
 	// all thresholds
-	private const float HUNGER_THRESHOLD = 50;
+	private const float HUNGER_THRESHOLD = 10;
 	private const float TIREDNESS_THRESHOLD = 50;
-	private const float EXCREMENTS_THRESHOLD = 1;
+	private const float EXCREMENTS_THRESHOLD = 3;
 	private const float HEALTH_THRESHOLD = 50;
 	private const float MOOD_THRESHOLD = 50;
 
@@ -24,8 +25,9 @@ public class PetLogic : MonoBehaviour {
 	public const float INC_MAX = 0.5f;
 
 	//
-	public const float EAT_WAIT = 5;
-	public const float PLAY_WAIT = 5;
+	public const float EXCREMENT_WAIT = 1;
+	public const float EAT_WAIT = 1;
+	public const float PLAY_WAIT = 1;
 
 	private float nextUpdate = 0;
 	// how fast the script updates
@@ -63,7 +65,7 @@ public class PetLogic : MonoBehaviour {
 		}
 
 		if (excrements > EXCREMENTS_THRESHOLD) {
-			SendExcrement();
+			StartCoroutine( SendExcrement());
 		}
 
 		if (health < HEALTH_THRESHOLD) {
@@ -93,12 +95,15 @@ public class PetLogic : MonoBehaviour {
 			health += Random.Range(INC_MIN, INC_MAX);
 		}
 
+		Debug.Log ("Excrements: " + excrements);
+		Debug.Log ("Hunger: " + hunger);
 	}
 
 	void SendHungry() {
 		if (animator) {
 			animator.SetBool("Hungry", true);
 		}
+
 	}
 
 	void SendAttention() {
@@ -113,15 +118,19 @@ public class PetLogic : MonoBehaviour {
 		}
 	}
 
-	void SendExcrement() {
+	IEnumerator SendExcrement() {
+		Debug.Log ("+++SendExcrement+++: " + i++);
 		if (animator) {
 			animator.SetBool("Excrement", true);
 		}
+		excrements = 0;
+		yield return new WaitForSeconds (EXCREMENT_WAIT);
 		if (animator) {
 			animator.SetBool("Excrement", false);
 		}
-		excrements = 0;
+
 	}
+
 
 	void SendDeath() {
 		if (animator) {
@@ -130,12 +139,12 @@ public class PetLogic : MonoBehaviour {
 	}
 	
 
-	public void OnFood() {
+	public IEnumerator OnFood() {
 		// gets called by user interaction script
 		if (animator) {
 			animator.SetBool("Eating", true);
 		}
-		//yield return new WaitForSeconds (EAT_WAIT);
+		yield return new WaitForSeconds (EAT_WAIT);
 		if (animator) {
 			animator.SetBool("Eating", false);
 			animator.SetBool("Hungry", false);
@@ -146,11 +155,11 @@ public class PetLogic : MonoBehaviour {
 
 	}
 	
-	public void OnPetting() {
+	public IEnumerator OnPetting() {
 		if (animator) {
 			animator.SetBool("Petting", true);
 		}
-		//yield return new WaitForSeconds (PLAY_WAIT);
+		yield return new WaitForSeconds (PLAY_WAIT);
 		if (animator) {
 			animator.SetBool("Petting", false);
 			animator.SetBool("Attention", false);
