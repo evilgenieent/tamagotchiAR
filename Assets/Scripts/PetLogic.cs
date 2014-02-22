@@ -210,24 +210,25 @@ public class PetLogic : MonoBehaviour {
 	
 
 	public IEnumerator OnFood() {
-		Debug.Log ("+++OnFood+++");
-		// gets called by user interaction script
-		if (animator) {
-			animator.SetBool("Eating", true);
-		}
-		yield return new WaitForSeconds (EAT_WAIT);
-		if (animator) {
-			animator.SetBool("Eating", false);
+		if(hunger >= 50)
+			Debug.Log ("+++OnFood+++");
+			// gets called by user interaction script
+			if (animator) {
+				animator.SetBool("Eating", true);
+			}
 			yield return new WaitForSeconds (EAT_WAIT);
-			animator.SetBool("Hungry", false);
+			if (animator) {
+				animator.SetBool("Eating", false);
+				yield return new WaitForSeconds (EAT_WAIT);
+				animator.SetBool("Hungry", false);
+			}
+			hunger = 50;
+			if (hunger < 0)
+				hunger = 0;
+
+			// cat wants to poo randomly
+			excrements += Random.Range (60.0f, 60.0f);
 		}
-		hunger -= 50;
-		if (hunger < 0)
-			hunger = 0;
-
-		// cat wants to poo randomly
-		excrements += Random.Range (60.0f, 60.0f);
-
 	}
 	
 	public IEnumerator OnPetting() {
