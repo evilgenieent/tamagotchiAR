@@ -21,9 +21,11 @@ public class PetLogic : MonoBehaviour {
 
 	public float updateRate;
 
+	private Animator animator;
+
 	// Use this for initialization
 	void Start () {
-	
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -84,19 +86,27 @@ public class PetLogic : MonoBehaviour {
 	}
 
 	void sendHungry() {
-		// TODO
+		if (this.animator) {
+			animator.SetBool("Hungry", true);
+		}
 	}
 
 	void sendSleepy() {
-		// TODO
+		if (this.animator) {
+			animator.SetBool("Sleepy", true);
+		}
 	}
 
 	void sendExcrement() {
-		// TODO
+		if (this.animator) {
+			animator.SetBool("Excrement", true);
+		}
 	}
 
 	void sendDeath() {
-		// TODO
+		if (this.animator) {
+			animator.SetBool("Dead", true);
+		}
 	}
 
 	void sendAttention() {
