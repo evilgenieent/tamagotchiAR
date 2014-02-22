@@ -19,13 +19,6 @@ public class PetLogic : MonoBehaviour {
 	public const float HEALTH_THRESHOLD = 50;
 	public const float MOOD_THRESHOLD = 50;
 
-	private const float HUNGER_THRESHOLD = 1;
-	private const float TIREDNESS_THRESHOLD = 50;
-	private const float EXCREMENTS_THRESHOLD = 50;
-	private const float HEALTH_THRESHOLD = 50;
-	private const float MOOD_THRESHOLD = 50;
-
-
 	// incremention random factor (range)
 	public const float INC_MIN = 0.2f;
 	public const float INC_MAX = 0.5f;
@@ -62,23 +55,23 @@ public class PetLogic : MonoBehaviour {
 	void checkState() {
 
 		if (hunger > HUNGER_THRESHOLD) {
-			sendHungry();
+			SendHungry();
 		}
 
 		if (tiredness > TIREDNESS_THRESHOLD) {
-			sendSleepy();
+			SendSleepy();
 		}
 
 		if (excrements > EXCREMENTS_THRESHOLD) {
-			sendExcrement();
+			SendExcrement();
 		}
 
 		if (health < HEALTH_THRESHOLD) {
-			sendDeath();
+			SendDeath();
 		}
 
 		if (mood < MOOD_THRESHOLD) {
-			sendAttention();
+			SendAttention();
 		}
 
 	}
